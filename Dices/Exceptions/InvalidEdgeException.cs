@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Dices
 {
-    class InvalidEdgeException : Exception
+    public class InvalidEdgeException : Exception
     {
         public int Edge
         {

@@ -28,7 +28,7 @@ namespace Dices
         {
             double attackerDexterity = attackerAgility + attackerReaction;
             double defenderDexterity = defenderAgility + defenderReaction;
-            int edge = (int) Math.Round(defenderDexterity / (defenderDexterity + attackerDexterity));
+            int edge = (int) Math.Round(100 * defenderDexterity / (defenderDexterity + attackerDexterity));
 
             if (edge >= settings.CriticalHitProcThreshold)
                 throw new InvalidEdgeException(edge);
@@ -56,12 +56,5 @@ namespace Dices
             return d100 <= dodgeChance ? EvasionProc.Dodged : EvasionProc.Failed;
         }
 
-        public string Result
-        {
-            get
-            {
-                return "Result";
-            }
-        }
     }
 }
