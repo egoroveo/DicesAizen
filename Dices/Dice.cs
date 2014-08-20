@@ -24,18 +24,23 @@ namespace Dices
             settings.InitializeDefaultValues();
         }
 
-        public HitProc HitRoll(int attackerAgility, int attackerReaction, int defenderAgility, int defenderReaction)
+        public int EdgeForHitRoll(int attackerAgility, int attackerReaction, int defenderAgility, int defenderReaction)
         {
+
             double attackerDexterity = attackerAgility + attackerReaction;
             double defenderDexterity = defenderAgility + defenderReaction;
-            int edge = (int) Math.Round(100 * defenderDexterity / (defenderDexterity + attackerDexterity));
+            int edge = (int)Math.Round(100 * defenderDexterity / (defenderDexterity + attackerDexterity));
 
             if (edge >= settings.CriticalHitProcThreshold)
                 throw new InvalidEdgeException(edge);
 
             if (edge <= settings.CriticalMissProcThreshold)
                 throw new InvalidEdgeException(edge);
+            return edge;
+        }
 
+        public HitProc HitRoll(int edge)
+        {
             var d100 = RandomGenerator.D100;
 
             if (d100 >= settings.CriticalHitProcThreshold)
@@ -49,12 +54,41 @@ namespace Dices
             return d100 >= edge ? HitProc.Hit : HitProc.Miss;
         }
 
-        public EvasionProc EvasionRoll(int actionPointsLeft)
+        public int EdgeForEvasionRoll(int actionPointsLeft)
         {
-            var dodgeChance = Math.Max(settings.MaxDodgeChance, actionPointsLeft * settings.DodgeChancePerActionPoint);
-            var d100 = RandomGenerator.D100;
-            return d100 <= dodgeChance ? EvasionProc.Dodged : EvasionProc.Failed;
+            return 100 - Math.Max(settings.MaxDodgeChance, actionPointsLeft * settings.DodgeChancePerActionPoint);
         }
 
+        public EvasionProc EvasionRoll(int edge)
+        {
+            var d100 = RandomGenerator.D100;
+            return d100 >= edge ? EvasionProc.Dodged : EvasionProc.Failed;
+        }
+
+        public int EdgeForParryRoll(int attackerStrength, int attackerReaction, int defenderStrength, int defenderReaction)
+        {
+            double attackerBalance = attackerStrength + attackerReaction;
+            double defenderBalance = defenderStrength + defenderReaction;
+            int edge = (int)Math.Round(100 * defenderBalance / (defenderBalance + attackerBalance));
+
+            if (edge >= settings.CriticalHitProcThreshold)
+                throw new InvalidEdgeException(edge);
+
+            if (edge <= settings.CriticalMissProcThreshold)
+                throw new InvalidEdgeException(edge);
+
+            return edge;
+        }
+
+        public ParryProc ParryRoll(int edge)
+        {
+            var d100 = RandomGenerator.D100;
+
+            if (d100 <= settings.ParryCriticalFailureProcThreshold)
+                return ParryProc.CrilicalFailure;
+            if (d100 >= settings.ParryCounterstrikeProcThreshold)
+                return ParryProc.Counterstrike;
+            return d100 >= edge ? ParryProc.Success : ParryProc.Failure;
+        }
     }
 }

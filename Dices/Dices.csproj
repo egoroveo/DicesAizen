@@ -43,6 +43,7 @@
     <Compile Include="DiceSettings.cs" />
     <Compile Include="Enum\HitProc.cs" />
     <Compile Include="Enum\EvasionProc.cs" />
+    <Compile Include="Enum\ParryProc.cs" />
     <Compile Include="Exceptions\InvalidEdgeException.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RandomGenerator.cs" />
