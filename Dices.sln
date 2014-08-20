@@ -1,0 +1,26 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Express 2012 for Windows Desktop
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dices", "Dices\Dices.csproj", "{79ED7AA5-8A56-4AA6-A5D1-C9AF4577806F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DicesTest", "DicesTest\DicesTest.csproj", "{63422DD5-A2EB-419A-967A-D65EFF2F49A5}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{79ED7AA5-8A56-4AA6-A5D1-C9AF4577806F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{79ED7AA5-8A56-4AA6-A5D1-C9AF4577806F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{79ED7AA5-8A56-4AA6-A5D1-C9AF4577806F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{79ED7AA5-8A56-4AA6-A5D1-C9AF4577806F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{63422DD5-A2EB-419A-967A-D65EFF2F49A5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{63422DD5-A2EB-419A-967A-D65EFF2F49A5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{63422DD5-A2EB-419A-967A-D65EFF2F49A5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{63422DD5-A2EB-419A-967A-D65EFF2F49A5}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
