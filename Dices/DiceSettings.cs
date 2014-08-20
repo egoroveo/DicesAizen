@@ -57,6 +57,29 @@ namespace Dices
             set;
         }
 
+        public int CounterstrikeCriticalFailureProcThreshold
+        {
+            get;
+            set;
+        }
+
+        public int CounterstrikeCriticalSuccessProcThreshold
+        {
+            get;
+            set;
+        }
+
+        public int CounterstrikeVeryStrongHitProcDifferenceThreshold
+        {
+            get;
+            set;
+        }
+
+        public int CounterstrikeWeakHitProcDifferenceThreshold
+        {
+            get;
+            set;
+        }
 
         public void InitializeDefaultValues()
         {
@@ -68,6 +91,10 @@ namespace Dices
             MaxDodgeChance = 20;
             ParryCriticalFailureProcThreshold = 10;
             ParryCounterstrikeProcThreshold = 90;
+            CounterstrikeCriticalFailureProcThreshold = 15;
+            CounterstrikeCriticalSuccessProcThreshold = 85;
+            CounterstrikeVeryStrongHitProcDifferenceThreshold = 15;
+            CounterstrikeWeakHitProcDifferenceThreshold = 15;
         }
 
 

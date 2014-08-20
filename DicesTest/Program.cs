@@ -48,6 +48,19 @@ namespace DicesTest
                 Console.WriteLine(ex.ToString());
             }
 
+            // Example of counterstrike roll
+            try
+            {
+                var counterstrikeEdge = dice.EdgeForCounterstrikeRoll(70, 50);
+                var counterstrikeProc = dice.CounterstrikeRoll(counterstrikeEdge);
+                // In the external program we need to make localization class to convert enums to strings
+                Console.WriteLine(counterstrikeProc.ToString());
+            }
+            catch (InvalidEdgeException ex) // In the case if edge is too big or small to conduct roll
+            {
+                Console.WriteLine(ex.ToString());
+            }
+
 
             Console.ReadKey();
         }

@@ -26,7 +26,6 @@ namespace Dices
 
         public int EdgeForHitRoll(int attackerAgility, int attackerReaction, int defenderAgility, int defenderReaction)
         {
-
             double attackerDexterity = attackerAgility + attackerReaction;
             double defenderDexterity = defenderAgility + defenderReaction;
             int edge = (int)Math.Round(100 * defenderDexterity / (defenderDexterity + attackerDexterity));
@@ -71,10 +70,10 @@ namespace Dices
             double defenderBalance = defenderStrength + defenderReaction;
             int edge = (int)Math.Round(100 * defenderBalance / (defenderBalance + attackerBalance));
 
-            if (edge >= settings.CriticalHitProcThreshold)
+            if (edge >= settings.ParryCounterstrikeProcThreshold)
                 throw new InvalidEdgeException(edge);
 
-            if (edge <= settings.CriticalMissProcThreshold)
+            if (edge <= settings.ParryCriticalFailureProcThreshold)
                 throw new InvalidEdgeException(edge);
 
             return edge;
@@ -90,5 +89,35 @@ namespace Dices
                 return ParryProc.Counterstrike;
             return d100 >= edge ? ParryProc.Success : ParryProc.Failure;
         }
+
+        public int EdgeForCounterstrikeRoll(int attackerStrength, int defenderStrength)
+        {
+            int edge = (int)Math.Round(100 * ((double)attackerStrength) / (((double)attackerStrength) + ((double)defenderStrength)));
+
+            if (edge >= settings.ParryCounterstrikeProcThreshold)
+                throw new InvalidEdgeException(edge);
+
+            if (edge <= settings.ParryCriticalFailureProcThreshold)
+                throw new InvalidEdgeException(edge);
+
+            return edge;
+        }
+
+        public CounterstrikeProc CounterstrikeRoll(int edge)
+        {
+            var d100 = RandomGenerator.D100;
+
+            if (d100 >= settings.CounterstrikeCriticalSuccessProcThreshold)
+                return CounterstrikeProc.Critical;
+            if (d100 <= settings.CounterstrikeCriticalFailureProcThreshold)
+                return CounterstrikeProc.CrilicalFailure;
+            if (d100 >= edge + settings.CounterstrikeVeryStrongHitProcDifferenceThreshold)
+                return CounterstrikeProc.VeryStrong;
+            if (d100 <= edge - settings.CounterstrikeWeakHitProcDifferenceThreshold)
+                return CounterstrikeProc.Weak;
+            return d100 >= edge ? CounterstrikeProc.Strong : CounterstrikeProc.Normal;
+        }
+       
+
     }
 }
