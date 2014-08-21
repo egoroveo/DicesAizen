@@ -20,8 +20,17 @@ namespace Dices
 
         public Dice()
         {
-            settings = new DiceSettings(); 
+            settings = new DiceSettings();
             settings.InitializeDefaultValues();
+        }
+
+        private void CheckValidEdge(int edge, int leftThreshold, int rightThreshold)
+        {
+            if (edge <= leftThreshold)
+                throw new InvalidEdgeException(edge);
+
+            if (edge >= rightThreshold)
+                throw new InvalidEdgeException(edge);
         }
 
         public int EdgeForHitRoll(int attackerAgility, int attackerReaction, int defenderAgility, int defenderReaction)
@@ -34,11 +43,7 @@ namespace Dices
 
         public HitProc HitRoll(int edge)
         {
-            if (edge >= settings.CriticalHitProcThreshold)
-                throw new InvalidEdgeException(edge);
-
-            if (edge <= settings.CriticalMissProcThreshold)
-                throw new InvalidEdgeException(edge);
+            CheckValidEdge(edge, settings.CriticalMissProcThreshold, settings.CriticalHitProcThreshold);
 
             var d100 = RandomGenerator.D100;
 
@@ -75,11 +80,7 @@ namespace Dices
 
         public ParryProc ParryRoll(int edge)
         {
-            if (edge >= settings.ParryCounterstrikeProcThreshold)
-                throw new InvalidEdgeException(edge);
-
-            if (edge <= settings.ParryCriticalFailureProcThreshold)
-                throw new InvalidEdgeException(edge);
+            CheckValidEdge(edge, settings.ParryCriticalFailureProcThreshold, settings.ParryCounterstrikeProcThreshold);
 
             var d100 = RandomGenerator.D100;
 
@@ -97,11 +98,7 @@ namespace Dices
 
         public CounterstrikeProc CounterstrikeRoll(int edge)
         {
-            if (edge >= settings.ParryCounterstrikeProcThreshold)
-                throw new InvalidEdgeException(edge);
-
-            if (edge <= settings.ParryCriticalFailureProcThreshold)
-                throw new InvalidEdgeException(edge);
+            CheckValidEdge(edge, settings.CounterstrikeCriticalSuccessProcThreshold, settings.CounterstrikeCriticalFailureProcThreshold);
 
             var d100 = RandomGenerator.D100;
 

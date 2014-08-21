@@ -2,4 +2,3 @@ B:\Users\egor\Documents\visual studio 2012\Projects\Dices\Dices\bin\Debug\Dices.
 B:\Users\egor\Documents\visual studio 2012\Projects\Dices\Dices\bin\Debug\Dices.pdb
 B:\Users\egor\Documents\visual studio 2012\Projects\Dices\Dices\obj\Debug\Dices.dll
 B:\Users\egor\Documents\visual studio 2012\Projects\Dices\Dices\obj\Debug\Dices.pdb
-B:\Users\egor\documents\visual studio 2012\Projects\Dices\Dices\obj\Debug\Dices.csprojResolveAssemblyReference.cache
