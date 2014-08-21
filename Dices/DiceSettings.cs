@@ -81,6 +81,30 @@ namespace Dices
             set;
         }
 
+        public int StrengthCriticalProcThreshold
+        {
+            get;
+            set;
+        }
+
+        public int StrengthVeryWeakProcThreshold
+        {
+            get;
+            set;
+        }
+
+        public int StrengthVeryStrongHitProcDifferenceThreshold
+        {
+            get;
+            set;
+        }
+
+        public int StrengthWeakHitProcDifferenceThreshold
+        {
+            get;
+            set;
+        }
+
         public void InitializeDefaultValues()
         {
             CriticalHitProcThreshold = 85;
@@ -95,6 +119,10 @@ namespace Dices
             CounterstrikeCriticalSuccessProcThreshold = 85;
             CounterstrikeVeryStrongHitProcDifferenceThreshold = 15;
             CounterstrikeWeakHitProcDifferenceThreshold = 15;
+            StrengthVeryWeakProcThreshold = 15;
+            StrengthCriticalProcThreshold = 85;
+            StrengthVeryStrongHitProcDifferenceThreshold = 15;
+            StrengthWeakHitProcDifferenceThreshold = 15;
         }
 
 

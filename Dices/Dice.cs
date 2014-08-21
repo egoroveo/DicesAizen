@@ -98,7 +98,7 @@ namespace Dices
 
         public CounterstrikeProc CounterstrikeRoll(int edge)
         {
-            CheckValidEdge(edge, settings.CounterstrikeCriticalSuccessProcThreshold, settings.CounterstrikeCriticalFailureProcThreshold);
+            CheckValidEdge(edge, settings.CounterstrikeCriticalFailureProcThreshold, settings.CounterstrikeCriticalSuccessProcThreshold);
 
             var d100 = RandomGenerator.D100;
 
@@ -117,5 +117,24 @@ namespace Dices
         {
             return (int)Math.Round(100 * ((double)attackerStrength) / (((double)attackerStrength) + ((double)defenderStrength)));
         }
+
+        public StrengthProc StrengthRoll(int edge)
+        {
+            CheckValidEdge(edge, settings.StrengthVeryWeakProcThreshold, settings.StrengthCriticalProcThreshold);
+
+            var d100 = RandomGenerator.D100;
+
+            if (d100 >= settings.CounterstrikeCriticalSuccessProcThreshold)
+                return StrengthProc.Critical;
+            if (d100 <= settings.CounterstrikeCriticalFailureProcThreshold)
+                return StrengthProc.VeryWeak;
+            if (d100 >= edge + settings.CounterstrikeVeryStrongHitProcDifferenceThreshold)
+                return StrengthProc.VeryStrong;
+            if (d100 <= edge - settings.CounterstrikeWeakHitProcDifferenceThreshold)
+                return StrengthProc.Weak;
+            return d100 >= edge ? StrengthProc.Strong : StrengthProc.Normal;
+        }
+
+
     }
 }

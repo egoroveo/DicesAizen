@@ -61,6 +61,19 @@ namespace DicesTest
                 Console.WriteLine(ex.ToString());
             }
 
+            // Example of strength roll
+            try
+            {
+                var strengthEdge = dice.EdgeForStrengthRoll(45, 50);
+                var strengthProc = dice.StrengthRoll(strengthEdge);
+                // In the external program we need to make localization class to convert enums to strings
+                Console.WriteLine(strengthProc.ToString());
+            }
+            catch (InvalidEdgeException ex) // In the case if edge is too big or small to conduct roll
+            {
+                Console.WriteLine(ex.ToString());
+            }
+
 
             Console.ReadKey();
         }
