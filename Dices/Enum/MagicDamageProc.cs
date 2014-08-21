@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Dices
 {
-    public enum MagicDamage
+    public enum MagicDamageProc
     {
         VeryWeak = 0,
         Weak = 1,

@@ -48,7 +48,7 @@
     <Compile Include="Enum\SpellHitProc.cs" />
     <Compile Include="Enum\SpellProc.cs" />
     <Compile Include="Enum\StrengthProc.cs" />
-    <Compile Include="Enum\MagicDamage.cs" />
+    <Compile Include="Enum\MagicDamageProc.cs" />
     <Compile Include="Enum\CriticalProc.cs" />
     <Compile Include="Exceptions\InvalidEdgeException.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

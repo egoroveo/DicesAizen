@@ -29,17 +29,17 @@ namespace Dices
             double attackerDexterity = attackerAgility + attackerReaction;
             double defenderDexterity = defenderAgility + defenderReaction;
             int edge = (int)Math.Round(100 * defenderDexterity / (defenderDexterity + attackerDexterity));
-
-            if (edge >= settings.CriticalHitProcThreshold)
-                throw new InvalidEdgeException(edge);
-
-            if (edge <= settings.CriticalMissProcThreshold)
-                throw new InvalidEdgeException(edge);
             return edge;
         }
 
         public HitProc HitRoll(int edge)
         {
+            if (edge >= settings.CriticalHitProcThreshold)
+                throw new InvalidEdgeException(edge);
+
+            if (edge <= settings.CriticalMissProcThreshold)
+                throw new InvalidEdgeException(edge);
+
             var d100 = RandomGenerator.D100;
 
             if (d100 >= settings.CriticalHitProcThreshold)
@@ -70,17 +70,17 @@ namespace Dices
             double defenderBalance = defenderStrength + defenderReaction;
             int edge = (int)Math.Round(100 * defenderBalance / (defenderBalance + attackerBalance));
 
+            return edge;
+        }
+
+        public ParryProc ParryRoll(int edge)
+        {
             if (edge >= settings.ParryCounterstrikeProcThreshold)
                 throw new InvalidEdgeException(edge);
 
             if (edge <= settings.ParryCriticalFailureProcThreshold)
                 throw new InvalidEdgeException(edge);
 
-            return edge;
-        }
-
-        public ParryProc ParryRoll(int edge)
-        {
             var d100 = RandomGenerator.D100;
 
             if (d100 <= settings.ParryCriticalFailureProcThreshold)
@@ -92,19 +92,17 @@ namespace Dices
 
         public int EdgeForCounterstrikeRoll(int attackerStrength, int defenderStrength)
         {
-            int edge = (int)Math.Round(100 * ((double)attackerStrength) / (((double)attackerStrength) + ((double)defenderStrength)));
+            return (int)Math.Round(100 * ((double)attackerStrength) / (((double)attackerStrength) + ((double)defenderStrength)));
+        }
 
+        public CounterstrikeProc CounterstrikeRoll(int edge)
+        {
             if (edge >= settings.ParryCounterstrikeProcThreshold)
                 throw new InvalidEdgeException(edge);
 
             if (edge <= settings.ParryCriticalFailureProcThreshold)
                 throw new InvalidEdgeException(edge);
 
-            return edge;
-        }
-
-        public CounterstrikeProc CounterstrikeRoll(int edge)
-        {
             var d100 = RandomGenerator.D100;
 
             if (d100 >= settings.CounterstrikeCriticalSuccessProcThreshold)
@@ -117,7 +115,10 @@ namespace Dices
                 return CounterstrikeProc.Weak;
             return d100 >= edge ? CounterstrikeProc.Strong : CounterstrikeProc.Normal;
         }
-       
 
+        public int EdgeForStrengthRoll(int attackerStrength, int defenderStrength)
+        {
+            return (int)Math.Round(100 * ((double)attackerStrength) / (((double)attackerStrength) + ((double)defenderStrength)));
+        }
     }
 }
